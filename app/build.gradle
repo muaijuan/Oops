@@ -1,10 +1,43 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-platform-android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def mKeystoreFile = file(properties.getProperty("keystore.path"))
+def mKeystorePSW = properties.getProperty("keystore.password")
+def mKeystoreAlias =  properties.getProperty("keystore.alias")
+def mKeystoreAliasPSW = properties.getProperty("keystore.alias_password")
 
 android {
+
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.all { output ->
+//            variant.getPackageApplication().outputDirectory = new File("f:" + File.separator + "apk" + File.separator + "walli" + File.separator + variant.buildType.name)
+//            def formatDate = new Date().format('yyMMddHHmm')
+//            if (variant.buildType.name.toLowerCase().contains("debug")) {
+//                outputFileName = "walli_android_" + variant.versionName + ".apk"
+//            } else {
+//                outputFileName = "walli_android_" + variant.versionName + "_" + formatDate + ".apk"
+//            }
+//        }
+//    }
+
+    signingConfigs {
+        releaseConfig {
+            keyAlias mKeystoreAlias
+            keyPassword mKeystoreAliasPSW
+            storeFile mKeystoreFile
+            storePassword mKeystorePSW
+            v2SigningEnabled false
+        }
+    }
+
     compileSdkVersion COMPILE_SDK_VERSION as int
     defaultConfig {
         applicationId "com.muaj.oops"
@@ -16,8 +49,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            //applicationIdSuffix ".debug"
+            //signingConfig signingConfigs.releaseConfig
+            versionNameSuffix "_debug"
+        }
         release {
-            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources true
+            minifyEnabled true
+            versionNameSuffix "_release"
+            signingConfig signingConfigs.releaseConfig
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,24 +71,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:design:$support_version"
     implementation "com.android.support:support-v4:$support_version"
     implementation "com.android.support:cardview-v7:$support_version"
-    implementation "com.android.support:recyclerview-v7:$support_version"
-    implementation "com.android.support:support-annotations:$support_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation "com.airbnb.android:lottie:$lottie_version"
+//    implementation "com.android.support:recyclerview-v7:$support_version"
+//    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
 
+    implementation "com.airbnb.android:lottie:$lottie_version"
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
     //dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
-   //databinding
-    kapt "com.android.databinding:compiler:$databinding_version"
+    //databinding
+    kapt "com.android.databinding:compiler:$gradle_version"
+
+    implementation project(':lib')
 }
 
 realm {

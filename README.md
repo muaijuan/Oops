@@ -1,1 +1,4 @@
-# Oops
+# walli-android
+如果项目是开源的，将签名文件的配置密码等信息明文配置在build.gradle中是不安全的。
+所以本项目将签名文件的配置密码之类的信息直接写在local.properties下，而在.gitignore中不将local.properties添加到Git的版本控制中。
+我们使用这种方式来防止签名文件密钥的泄密。

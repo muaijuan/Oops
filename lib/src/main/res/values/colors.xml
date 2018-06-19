@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  不透明度
+          95%->F2  90%->E5  85%->D8  80%->CC  75%->BF
+          70%->B2  65%->A5  60%->99  55%->8C  50%->7F
+          45%->72  40%->66  35%->59  30%->4C  25%->3F
+          20%->33  15%->21  10%->19  5%->0C    0%->00
+    -->
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="ghost_white">#f7f7fa</color>
+    <color name="white">#ffffff</color>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--CircleImageView-->
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+
+    <attr name="spark_SparkViewStyle" format="reference" />
+
+    <declare-styleable name="SparkView">
+        <attr name="spark_lineColor" format="color" />
+        <attr name="spark_lineWidth" format="dimension" />
+        <attr name="spark_cornerRadius" format="dimension" />
+
+        <attr name="spark_shader" format="boolean" />
+        <attr name="spark_shaderColor" format="color" />
+
+        <attr name="spark_playAnimate" format="boolean" />
+    </declare-styleable>
+</resources>
