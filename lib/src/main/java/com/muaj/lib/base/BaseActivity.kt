@@ -23,14 +23,11 @@ import com.muaj.lib.databinding.ViewstubToolbarBinding
  * Base Activity
  */
 
-abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseContract.BaseView {
+public abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseContract.BaseView {
 
     protected lateinit var mBinding: V
-    private lateinit var mBaseBinding: ActivityBaseBinding
-    private var mToolbarStubBinding: ViewstubToolbarBinding? = null
-
-    private var hasStatusBarFlag = false
-    private var hasToolStubFlag = false
+    protected lateinit var mBaseBinding: ActivityBaseBinding
+    protected var mToolbarStubBinding: ViewstubToolbarBinding? = null
 
     /**
      * 获取布局
@@ -38,12 +35,26 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      * @return
      */
     @get:LayoutRes
-    protected  abstract val  layoutId: Int
+    protected abstract val layoutId: Int
+
+    /**
+     * 是否有状态栏
+     * 若true则页面不占据状态栏位置，若false则占据状态栏位置
+     * @return
+     */
+    protected abstract val hasStatusBar: Boolean
+
+    /**
+     * 是否有toolbar
+     *
+     * @return
+     */
+    protected abstract val hasToolStub: Boolean
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base, null, false)
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(this), layoutId, null, false)
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(this),layoutId , null, false)
         mBaseBinding.rootLayout.addView(mBinding.root, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         //moveToBack() 打包运行不起作用 所以加上下面这句
         if (intent.flags and Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT != 0) {
@@ -55,11 +66,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
         setupActivityComponent(App.appComponent)
         attachView()
         initDatas()
-
-        hasStatusBarFlag = hasStatusBar()
         initStatusBar()
 
-        hasToolStubFlag = hasToolStub()
         //在viewstub初始化的时候调用如下监听器
         mBaseBinding.toolbarViewstub.setOnInflateListener { _, inflated -> mToolbarStubBinding = DataBindingUtil.bind(inflated) }
         initToolStub()
@@ -72,32 +80,28 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      *
      * @param appComponent
      */
-    abstract fun setupActivityComponent(appComponent: AppComponent)
+    open fun setupActivityComponent(appComponent: AppComponent) {}
 
     /**
      * Presenter绑定View
      */
-    abstract fun attachView()
+    open fun attachView() {}
 
     /**
      * 初始化数据
      */
-    abstract fun initDatas()
+    open fun initDatas() {}
+
 
     /**
      * 初始化ToolBar
      */
-    abstract fun initToolBar()
+    open fun initToolBar() {}
 
     /**
      * 初始化监听事件
      */
-    abstract fun initListener()
-
-    abstract fun hasStatusBar(): Boolean
-
-    abstract fun hasToolStub(): Boolean
-
+    open fun initListener() {}
 
     /**===================== StatusBar ====================== */
 
@@ -106,8 +110,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private fun initStatusBar() {
-        if (hasStatusBarFlag) {
-            StatusBarUtils.setRootFitsSystemWindows(this,true)
+        if (hasStatusBar) {
+            StatusBarUtils.setRootFitsSystemWindows(this, true)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 StatusBarUtils.setColor(this, Color.WHITE)
                 StatusBarUtils.setStatusBarDark(this, true)
@@ -131,11 +135,11 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      * init toolbar
      */
     private fun initToolStub() {
-        if (hasToolStubFlag && mToolbarStubBinding == null) {
+        if (hasToolStub && mToolbarStubBinding == null) {
             inflateToolbarViewStub()
         }
         if (mToolbarStubBinding != null) {
-            mToolbarStubBinding!!.commonToolbar.visibility = if (hasToolStubFlag) View.VISIBLE else View.GONE
+            mToolbarStubBinding!!.commonToolbar.visibility = if (hasToolStub) View.VISIBLE else View.GONE
         }
     }
 

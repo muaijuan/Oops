@@ -1,7 +1,11 @@
 package com.muaj.oops.activity
 
+import android.view.View
 import com.muaj.lib.base.BaseActivity
 import com.muaj.lib.component.AppComponent
+import com.muaj.lib.extensions.loadDrawable
+import com.muaj.lib.extensions.startActivity
+import com.muaj.lib.util.NoDoubleClickListener
 import com.muaj.oops.R
 import com.muaj.oops.component.DaggerMainComponent
 import com.muaj.oops.databinding.ActivityCreateWalletBinding
@@ -13,6 +17,13 @@ import com.muaj.oops.databinding.ActivityCreateWalletBinding
 class CreateWalletActivity : BaseActivity<ActivityCreateWalletBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_create_wallet
+
+    override val hasStatusBar: Boolean
+        get() = true
+
+    override val hasToolStub: Boolean
+        get() = false
+
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
@@ -35,13 +46,12 @@ class CreateWalletActivity : BaseActivity<ActivityCreateWalletBinding>() {
     }
 
     override fun initListener() {
+        mBinding.btnCreate.setOnClickListener(object : NoDoubleClickListener() {
+            override fun onNoDoubleClick(v: View) {
+                startActivity<WalletStep1Activity> { }
+            }
+
+        })
     }
 
-    override fun hasStatusBar(): Boolean {
-        return true
-    }
-
-    override fun hasToolStub(): Boolean {
-        return false
-    }
 }

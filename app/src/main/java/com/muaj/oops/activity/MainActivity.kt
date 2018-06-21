@@ -21,6 +21,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_main
 
+    override val hasStatusBar: Boolean
+        get() = false
+
+    override val hasToolStub: Boolean
+        get() = false
+
+
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
                 .appComponent(appComponent)
@@ -46,16 +53,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initListener() {
 
     }
-
-    override fun hasStatusBar(): Boolean {
-        return false
-    }
-
-    override fun hasToolStub(): Boolean {
-        return false
-    }
-
-
-
 
 }

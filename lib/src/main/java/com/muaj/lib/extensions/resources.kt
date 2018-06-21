@@ -80,7 +80,7 @@ fun android.support.v4.app.Fragment.loadTypefaceFromAsset(fileName: String): Typ
  */
 fun View.loadColor(@ColorRes id: Int): Int = context.loadColor(id)
 
-fun View.loadDrawable(@ColorRes id: Int): Drawable? = context.loadDrawable(id)
+fun View.loadDrawable(@DrawableRes id: Int): Drawable? = context.loadDrawable(id)
 
 fun View.loadRaw(@RawRes id: Int): InputStream? = context.loadRaw(id)
 

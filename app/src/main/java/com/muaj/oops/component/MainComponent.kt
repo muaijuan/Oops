@@ -3,6 +3,7 @@ package com.muaj.oops.component
 import com.muaj.lib.component.AppComponent
 import com.muaj.oops.activity.CreateWalletActivity
 import com.muaj.oops.activity.MainActivity
+import com.muaj.oops.activity.WalletStep1Activity
 import com.muaj.oops.fragment.HomeFragment
 import com.muaj.oops.module.ActivityModule
 import dagger.Component
@@ -18,4 +19,6 @@ interface MainComponent {
     fun inject(fragment: HomeFragment)
 
     fun inject(activity: CreateWalletActivity)
+
+    fun inject(activity: WalletStep1Activity)
 }

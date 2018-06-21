@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'kotlin-platform-android'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 
@@ -67,9 +66,13 @@ android {
     dataBinding {
         enabled = true
     }
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
+    implementation project(':lib')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -91,7 +94,7 @@ dependencies {
     //databinding
     kapt "com.android.databinding:compiler:$gradle_version"
 
-    implementation project(':lib')
+
 }
 
 realm {
