@@ -23,7 +23,7 @@ import com.muaj.lib.databinding.ViewstubToolbarBinding
  * Base Activity
  */
 
-public abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseContract.BaseView {
+abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseContract.BaseView {
 
     protected lateinit var mBinding: V
     protected lateinit var mBaseBinding: ActivityBaseBinding

@@ -1,8 +1,11 @@
 package com.muaj.oops.activity
 
+import android.graphics.Color
+import android.view.View
 import com.muaj.lib.base.BaseActivity
 import com.muaj.lib.component.AppComponent
-import com.muaj.lib.extensions.loadDrawable
+import com.muaj.lib.extensions.*
+import com.muaj.lib.util.ClickProxy
 import com.muaj.oops.R
 import com.muaj.oops.component.DaggerMainComponent
 import com.muaj.oops.databinding.ActivityWalletStep1Binding
@@ -39,9 +42,15 @@ class WalletStep1Activity : BaseActivity<ActivityWalletStep1Binding>() {
 
     override fun initToolBar() {
         mToolbarStubBinding!!.ivToolbarBack.setImageDrawable(loadDrawable(R.drawable.svg_arrow_left))
+        mToolbarStubBinding!!.tvToolbarTitle.text = "创建钱包"
     }
 
     override fun initListener() {
+        mToolbarStubBinding!!.ivToolbarBack.setOnClickListener(ClickProxy(View.OnClickListener { v ->
+            onBackPressed()
+        }))
+        mBinding.btnCreate.setOnClickListener(ClickProxy(View.OnClickListener { }))
+
     }
 
 }
