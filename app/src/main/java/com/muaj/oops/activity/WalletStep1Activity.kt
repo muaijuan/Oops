@@ -1,6 +1,5 @@
 package com.muaj.oops.activity
 
-import android.graphics.Color
 import android.view.View
 import com.muaj.lib.base.BaseActivity
 import com.muaj.lib.component.AppComponent
@@ -49,7 +48,18 @@ class WalletStep1Activity : BaseActivity<ActivityWalletStep1Binding>() {
         mToolbarStubBinding!!.ivToolbarBack.setOnClickListener(ClickProxy(View.OnClickListener { v ->
             onBackPressed()
         }))
-        mBinding.btnCreate.setOnClickListener(ClickProxy(View.OnClickListener { }))
+        mBinding.btnCreate.setOnClickListener(ClickProxy(View.OnClickListener {
+
+        }))
+
+    }
+
+    fun createWallet(){
+      /**  step1:gen mnemonic words
+       *    1)
+       * step2:mnemonic to seed
+       * step3:seed to master key and master chain code
+       */
 
     }
 

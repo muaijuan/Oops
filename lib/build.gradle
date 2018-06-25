@@ -52,6 +52,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     //databinding
     kapt "com.android.databinding:compiler:$gradle_version"
+    //web3j
+    implementation 'org.web3j:core:3.3.1-android'
+    implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 }
 realm {
     syncEnabled = true
