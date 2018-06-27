@@ -5,6 +5,7 @@ import android.content.Context
 
 import com.muaj.lib.component.AppComponent
 import com.muaj.lib.component.DaggerAppComponent
+import io.realm.Realm
 
 /**
  * Created by muaj on 2018/6/6
@@ -17,6 +18,8 @@ class App : Application() {
         super.onCreate()
         mContext = this
         initComponent()
+        // Initialize Realm (just once per application)
+        Realm.init(this)
     }
 
     private fun initComponent() {
