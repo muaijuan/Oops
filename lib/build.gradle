@@ -33,16 +33,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:design:$support_version"
     implementation "com.android.support:support-v4:$support_version"
     implementation "com.android.support:cardview-v7:$support_version"
-//    implementation "com.android.support:recyclerview-v7:$support_version"
-//    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
-
+    //    implementation "com.android.support:recyclerview-v7:$support_version"
+    //    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
     implementation "com.airbnb.android:lottie:$lottie_version"
     //glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
@@ -55,9 +53,10 @@ dependencies {
     //web3j
     implementation 'org.web3j:core:3.3.1-android'
     implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
-
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
+    //implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.4.0'
 }
 realm {
     syncEnabled = true

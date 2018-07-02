@@ -2,6 +2,7 @@ package com.muaj.lib.util
 
 import com.muaj.lib.base.App
 import com.muaj.lib.entity.ETHWallet
+import com.muaj.lib.extensions.createOrExistsDir
 import com.muaj.lib.extensions.getExternalPrivateDirPath
 import com.muaj.lib.extensions.logi
 import org.bitcoinj.crypto.ChildNumber
@@ -11,6 +12,7 @@ import org.web3j.crypto.ECKeyPair
 import org.web3j.crypto.Keys
 import org.web3j.crypto.Wallet
 import org.web3j.crypto.WalletFile
+import org.web3j.protocol.ObjectMapperFactory
 import java.io.File
 import java.io.IOException
 
@@ -19,7 +21,7 @@ import java.io.IOException
  * 以太坊钱包创建工具类
  */
 class ETHWalletUtils {
-
+    private val objectMapper = ObjectMapperFactory.getObjectMapper()
     // 钱包文件外置存储目录
     val Wallet_DIR: String
         get() = App.mContext.getExternalPrivateDirPath("oops_wallet")
@@ -31,7 +33,8 @@ class ETHWalletUtils {
      * 随机
      */
     private val secureRandom = SecureRandomUtils.secureRandom()
-    private val TAG="ETHWalletUtils"
+    private val TAG = "ETHWalletUtils"
+
     companion object {
         /**
          * 通用的以太坊基于bip44协议的助记词路径（imtoken jaxx Metamask myetherwallet）
@@ -41,7 +44,7 @@ class ETHWalletUtils {
         val ETH_CUSTOM_TYPE = "m/44'/60'/1'/0/0"
     }
 
-    fun generateMnemonic(walletName: String, pwd: String):ETHWallet?{
+    fun generateMnemonic(walletName: String, pwd: String): ETHWallet? {
         val pathArray = ETH_JAXX_TYPE.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val passphrase = ""
         val creationTimeSeconds = System.currentTimeMillis() / 1000
@@ -67,7 +70,7 @@ class ETHWalletUtils {
      * @return
      */
     private fun generateWalletByMnemonic(walletName: String, ds: DeterministicSeed,
-                                 pathArray: Array<String>, pwd: String): ETHWallet? {
+                                         pathArray: Array<String>, pwd: String): ETHWallet? {
         //种子
         val seedBytes = ds.seedBytes
         //        System.out.println(Arrays.toString(seedBytes));
@@ -81,13 +84,13 @@ class ETHWalletUtils {
         //step4:子私钥推导
         for (i in 1 until pathArray.size) {
             val childNumber: ChildNumber
-            if (pathArray[i].endsWith("'")) {
+            childNumber = if (pathArray[i].endsWith("'")) {
                 val number = Integer.parseInt(pathArray[i].substring(0,
                         pathArray[i].length - 1))
-                childNumber = ChildNumber(number, true)
+                ChildNumber(number, true)
             } else {
                 val number = Integer.parseInt(pathArray[i])
-                childNumber = ChildNumber(number, false)
+                ChildNumber(number, false)
             }
             dkKey = HDKeyDerivation.deriveChildKey(dkKey, childNumber)
         }
@@ -95,10 +98,16 @@ class ETHWalletUtils {
         //step5：生成Secp256k1公钥/密钥对，并存储到ECKeyPair内
         val keyPair = ECKeyPair.create(dkKey.privKeyBytes)
         val ethWallet = generateWallet(walletName, pwd, keyPair)
-        if (ethWallet != null) {
-            ethWallet!!.setMnemonic(convertMnemonicList(mnemonic!!))
-        }
+        ethWallet?.mnemonic = convertMnemonicList(mnemonic!!)
         return ethWallet
+    }
+
+    private fun convertMnemonicList(mnemonics: List<String>): String {
+        var mnemonicStr = ""
+        for (mnemonic in mnemonics) {
+            mnemonicStr = "$mnemonic "
+        }
+        return mnemonicStr.trim { it <= ' ' }
     }
 
     private fun generateWallet(walletName: String, pwd: String, ecKeyPair: ECKeyPair): ETHWallet? {
@@ -113,13 +122,15 @@ class ETHWalletUtils {
 
         val publicKey = ecKeyPair.publicKey
         val s = publicKey.toString()
-        logi("publicKey = $s",TAG)
+        logi("publicKey = $s", TAG)
         val destination = File("$Wallet_DIR/", "keystore_$walletName.json")
 
         //目录不存在则创建目录，创建不了则报错
-        if (!createParentDir(destination)) {
+        if (!createOrExistsDir(Wallet_DIR)) {
+            println("创建目标文件所在目录失败！")
             return null
         }
+
         try {
             objectMapper.writeValue(destination, walletFile)
         } catch (e: IOException) {
@@ -128,10 +139,14 @@ class ETHWalletUtils {
         }
 
         val ethWallet = ETHWallet()
-        ethWallet.setName(walletName)
-        ethWallet.setAddress(Keys.toChecksumAddress(walletFile.address))
-        ethWallet.setKeystorePath(destination.getAbsolutePath())
-        ethWallet.setPassword(Md5Utils.md5(pwd))
+        ethWallet.name = walletName
+        ethWallet.address = Keys.toChecksumAddress(walletFile.address)
+        ethWallet.keystorePath = destination.absolutePath
+        ethWallet.password = Md5Utils.md5(pwd)
         return ethWallet
     }
+
+
+
+
 }

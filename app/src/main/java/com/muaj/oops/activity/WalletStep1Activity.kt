@@ -54,13 +54,6 @@ class WalletStep1Activity : BaseActivity<ActivityWalletStep1Binding>() {
 
     }
 
-    fun createWallet(){
-      /**  step1:生成助记词mnemonic
-       *    1)
-       * step2:mnemonic to seed
-       * step3:seed to master key and master chain code
-       */
 
-    }
 
 }
