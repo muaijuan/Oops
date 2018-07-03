@@ -3,25 +3,26 @@ package com.muaj.oops.activity
 import android.view.View
 import com.muaj.lib.base.BaseActivity
 import com.muaj.lib.component.AppComponent
-import com.muaj.lib.extensions.*
+import com.muaj.lib.extensions.startActivity
 import com.muaj.lib.util.ClickProxy
 import com.muaj.oops.R
 import com.muaj.oops.component.DaggerMainComponent
-import com.muaj.oops.databinding.ActivityWalletStep1Binding
+import com.muaj.oops.databinding.ActivityWalletHomeBinding
 
 /**
- * Created by muaj on 2018/6/19
- * WalletStep1 Activity
+ * Created by muaj on 2018/6/6
+ * WalletHome Activity
  */
-class WalletStep1Activity : BaseActivity<ActivityWalletStep1Binding>() {
+class WalletHomeActivity : BaseActivity<ActivityWalletHomeBinding>() {
     override val layoutId: Int
-        get() = R.layout.activity_wallet_step1
+        get() = R.layout.activity_wallet_home
 
     override val hasStatusBar: Boolean
         get() = true
 
     override val hasToolStub: Boolean
-        get() = true
+        get() = false
+
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
@@ -40,20 +41,13 @@ class WalletStep1Activity : BaseActivity<ActivityWalletStep1Binding>() {
     }
 
     override fun initToolBar() {
-        mToolbarStubBinding!!.ivToolbarBack.setImageDrawable(loadDrawable(R.drawable.svg_arrow_left))
-        mToolbarStubBinding!!.tvToolbarTitle.text = "创建钱包"
+
     }
 
     override fun initListener() {
-        mToolbarStubBinding!!.ivToolbarBack.setOnClickListener(ClickProxy(View.OnClickListener { v ->
-            onBackPressed()
+        mBinding.btnCreate.setOnClickListener(ClickProxy(View.OnClickListener { v ->
+            startActivity<CreateWalletActivity> { }
         }))
-        mBinding.btnCreate.setOnClickListener(ClickProxy(View.OnClickListener {
-
-        }))
-
     }
-
-
 
 }

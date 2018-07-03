@@ -4,20 +4,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+       android:padding="20dp">
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_wallet_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="钱包名称"
+            android:maxLines="1"/>
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLines="1"/>
 
         <Button
             android:id="@+id/btn_create"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="创建钱包" />
-
-        <Button
-            android:id="@+id/btn_import"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="导入钱包" />
+            android:text="创建"/>
     </LinearLayout>
 </layout>

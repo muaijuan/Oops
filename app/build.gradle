@@ -38,6 +38,7 @@ android {
     }
 
     compileSdkVersion COMPILE_SDK_VERSION as int
+//    compileSdkVersion 'android-P'
     defaultConfig {
         applicationId "com.muaj.oops"
         minSdkVersion MIN_SDK_VERSION
