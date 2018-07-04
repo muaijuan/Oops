@@ -3,8 +3,6 @@ package com.muaj.oops.item
 
 import android.databinding.BindingAdapter
 import android.graphics.Color
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 
@@ -31,12 +29,9 @@ class CoinItem : RVAdapter.RVItem {
         get() = BR.item
 
     var coin: String
-    @DrawableRes
     var iconId: Int = 0
     var yData: FloatArray
-    @ColorInt
     var lineColor: Int = 0
-    @ColorInt
     var shaderColor: Int = 0
 
     init {
@@ -68,7 +63,7 @@ class CoinItem : RVAdapter.RVItem {
 
         @BindingAdapter(value = ["yData", "lineColor", "shaderColor"], requireAll = true)
         @JvmStatic
-        fun setSparkAdapter(sparkView: SparkView, yData: FloatArray, @ColorInt lineColor: Int, @ColorInt shaderColor: Int) {
+        fun setSparkAdapter(sparkView: SparkView, yData: FloatArray,lineColor: Int, shaderColor: Int) {
             val adapter = RandomizedAdapter(yData)
             sparkView.setShaderColor(shaderColor)
             sparkView.setLineColor(lineColor)

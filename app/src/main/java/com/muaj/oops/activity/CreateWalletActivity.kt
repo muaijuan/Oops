@@ -13,16 +13,10 @@ import com.muaj.oops.databinding.ActivityCreateWalletBinding
  * Created by muaj on 2018/6/19
  * CreateWallet Activity
  */
-class CreateWalletActivity : BaseActivity<ActivityCreateWalletBinding>() {
-    override val layoutId: Int
-        get() = R.layout.activity_create_wallet
-
-    override val hasStatusBar: Boolean
-        get() = true
-
-    override val hasToolStub: Boolean
-        get() = true
-
+class CreateWalletActivity(override val layoutId: Int = R.layout.activity_create_wallet,
+                           override val hasStatusBar: Boolean = true,
+                           override val hasToolStub: Boolean = true)
+    : BaseActivity<ActivityCreateWalletBinding>() {
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
                 .appComponent(appComponent)
@@ -53,7 +47,6 @@ class CreateWalletActivity : BaseActivity<ActivityCreateWalletBinding>() {
         }))
 
     }
-
 
 
 }

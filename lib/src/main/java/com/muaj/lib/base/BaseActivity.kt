@@ -80,28 +80,28 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      *
      * @param appComponent
      */
-    open fun setupActivityComponent(appComponent: AppComponent) {}
+    abstract fun setupActivityComponent(appComponent: AppComponent)
 
     /**
      * Presenter绑定View
      */
-    open fun attachView() {}
+    abstract fun attachView()
 
     /**
      * 初始化数据
      */
-    open fun initDatas() {}
+    abstract fun initDatas()
 
 
     /**
      * 初始化ToolBar
      */
-    open fun initToolBar() {}
+    abstract fun initToolBar()
 
     /**
      * 初始化监听事件
      */
-    open fun initListener() {}
+    abstract fun initListener()
 
     /**===================== StatusBar ====================== */
 

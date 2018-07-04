@@ -13,16 +13,9 @@ import com.muaj.oops.databinding.ActivityWalletHomeBinding
  * Created by muaj on 2018/6/6
  * WalletHome Activity
  */
-class WalletHomeActivity : BaseActivity<ActivityWalletHomeBinding>() {
-    override val layoutId: Int
-        get() = R.layout.activity_wallet_home
-
-    override val hasStatusBar: Boolean
-        get() = true
-
-    override val hasToolStub: Boolean
-        get() = false
-
+class WalletHomeActivity(override val layoutId: Int = R.layout.activity_wallet_home,
+                         override val hasStatusBar: Boolean = true,
+                         override val hasToolStub: Boolean = false) : BaseActivity<ActivityWalletHomeBinding>() {
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()

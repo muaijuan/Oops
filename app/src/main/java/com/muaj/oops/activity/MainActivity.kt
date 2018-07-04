@@ -14,19 +14,12 @@ import com.muaj.oops.databinding.ActivityMainBinding
  * Created by muaj on 2018/6/6
  * Main Activity
  */
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity(override val layoutId: Int = R.layout.activity_main,
+                   override val hasStatusBar: Boolean = false,
+                   override val hasToolStub: Boolean = false)
+    : BaseActivity<ActivityMainBinding>() {
 
     private var tabAdapter: TabFragmentPagerAdapter? = null
-
-    override val layoutId: Int
-        get() = R.layout.activity_main
-
-    override val hasStatusBar: Boolean
-        get() = false
-
-    override val hasToolStub: Boolean
-        get() = false
-
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
