@@ -31,11 +31,15 @@ class SplashscreenActivity(override val layoutId: Int = R.layout.activity_splash
     }
 
     override fun initToolBar() {
-        StatusBarUtils.setTranslucent(this,200)
+
     }
 
     override fun initListener() {
     }
 
 
+    override fun setStatusBar() {
+        super.setStatusBar()
+        StatusBarUtils.setTranslucent(this,150)
+    }
 }

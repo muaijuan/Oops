@@ -103,6 +103,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
      */
     abstract fun initListener()
 
+    open fun setStatusBar(){}
+
     /**===================== StatusBar ====================== */
 
     /**
@@ -126,6 +128,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
                 StatusBarUtils.setStatusBarDark(this, true)
             }
         }
+        setStatusBar()
     }
 
 
