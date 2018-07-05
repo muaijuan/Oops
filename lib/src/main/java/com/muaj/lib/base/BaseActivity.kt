@@ -75,6 +75,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity(), BaseCont
         initListener()
     }
 
+
     /**
      * 使用Dagger2对Activity进行注入
      *

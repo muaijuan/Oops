@@ -28,29 +28,29 @@ object KLog {
     private const val CALL_INDEX = 5
 
 
-    fun v(msg: String, customTag: String = "") {
-        log(Log.VERBOSE, customTag, msg)
+    fun v(msg: String, customTag: String = "",isformat: Boolean=false) {
+        log(Log.VERBOSE, customTag, msg,isformat)
     }
 
-    fun d(msg: String, customTag: String = "") {
-        log(Log.DEBUG, customTag, msg)
+    fun d(msg: String, customTag: String = "",isformat: Boolean=false) {
+        log(Log.DEBUG, customTag, msg,isformat)
     }
 
-    fun i(msg: String, customTag: String = "") {
-        log(Log.INFO, customTag, msg)
+    fun i(msg: String, customTag: String = "",isformat: Boolean=false) {
+        log(Log.INFO, customTag, msg,isformat)
     }
 
-    fun w(msg: String, customTag: String = "") {
-        log(Log.WARN, customTag, msg)
+    fun w(msg: String, customTag: String = "",isformat: Boolean=false) {
+        log(Log.WARN, customTag, msg,isformat)
     }
 
-    fun e(msg: String, customTag: String = "") {
-        log(Log.ERROR, customTag, msg)
+    fun e(msg: String, customTag: String = "",isformat: Boolean=false) {
+        log(Log.ERROR, customTag, msg,isformat)
     }
 
-    fun json(msg: String, customTag: String = "") {
+    fun json(msg: String, customTag: String = "",isformat: Boolean=false) {
         val json = formatJson(msg)
-        log(Log.ERROR, customTag, json)
+        log(Log.ERROR, customTag, json,isformat)
     }
 
     /**
@@ -77,19 +77,22 @@ object KLog {
      * @param customTag
      * @param msg
      */
-    private fun log(priority: Int, customTag: String, msg: String) {
+    private fun log(priority: Int, customTag: String, msg: String, isformat: Boolean=false) {
         if (!logEnabled) return
+        if (!isformat) {
+            Log.println(priority, customTag, msg)
+        } else {
+            val elements = Thread.currentThread().stackTrace
+            val index = findIndex(elements)
+            val element = elements[index]
+            val tag = handleTag(element, customTag)
+            var message = msg
+            if (msg.contains("\n")) {
+                message = msg.replace("\n".toRegex(), "\n$VERTICAL_DOUBLE_LINE ")
+            }
 
-        val elements = Thread.currentThread().stackTrace
-        val index = findIndex(elements)
-        val element = elements[index]
-        val tag = handleTag(element, customTag)
-        var message = msg
-        if (msg.contains("\n")) {
-            message = msg.replace("\n".toRegex(), "\n$VERTICAL_DOUBLE_LINE ")
+            Log.println(priority, tag, handleFormat(element, message))
         }
-
-        Log.println(priority, tag, handleFormat(element, message))
     }
 
     /**
