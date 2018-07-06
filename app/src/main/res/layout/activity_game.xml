@@ -2,159 +2,306 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#F8F8FF">
 
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="x0:"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="x0:" />
+
         <com.muaj.lib.view.ClearEditText
             android:id="@+id/edit_x0"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="y0:"
-            android:layout_marginLeft="5dp"
-            android:gravity="center" />
-        <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_y0"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="x范围:"
-            android:gravity="center"/>
-        <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_xfrom"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="to"
-            android:layout_marginLeft="5dp"
-            android:gravity="center" />
-        <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_xto"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="x增值:"
             android:gravity="center"
-            android:layout_marginLeft="5dp"/>
+            android:text="x增值:" />
+
         <com.muaj.lib.view.ClearEditText
             android:id="@+id/edit_xadd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="y范围:"
-            android:gravity="center"/>
-        <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_yfrom"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="to"
-            android:layout_marginLeft="5dp"
-            android:gravity="center" />
-        <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_yto"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="y增值:"
             android:gravity="center"
-            android:layout_marginLeft="5dp"/>
+            android:text="x范围:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_xfrom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="from"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_xto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="to"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="win大于:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_xwin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="y0:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_y0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="y增值:" />
+
         <com.muaj.lib.view.ClearEditText
             android:id="@+id/edit_yadd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="值要大于:"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="y范围:" />
+
         <com.muaj.lib.view.ClearEditText
-            android:id="@+id/edit_morethan"
+            android:id="@+id/edit_yfrom"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="1.5"
+            android:hint="from"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_yto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="to"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="win大于:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_ywin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="z0(可选):" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_z0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="z增值:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_zadd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="z范围:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_zfrom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="from"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_zto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:hint="to"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="win大于:" />
+
+        <com.muaj.lib.view.ClearEditText
+            android:id="@+id/edit_zwin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_print"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="确定输入"
+            android:background="#1E90FF"
+            android:textColor="#ffffff" />
+        <Button
+            android:id="@+id/btn_result"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="获取结果"
+            android:background="#1E90FF"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_print"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="结果:"/>
-    <TextView
-        android:id="@+id/tv_result"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:fadeScrollbars="false"
+        android:scrollbars="vertical"
+        android:textSize="10sp"
+        android:hint="显示输入" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"/>
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:hint="显示结果" />
+    </ScrollView>
+
 
 </LinearLayout>

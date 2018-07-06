@@ -42,7 +42,8 @@ class SplashscreenActivity(override val layoutId: Int = R.layout.activity_splash
     override fun initListener() {
         val mHandler:Handler= Handler(Looper.getMainLooper())
         val runnable=mHandler.postDelay(2000){
-            startActivity<WalletHomeActivity> { }
+//            startActivity<WalletHomeActivity> { }
+            startActivity<GameActivity> { }
             finish()
         }
 

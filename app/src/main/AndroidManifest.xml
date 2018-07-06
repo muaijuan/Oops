@@ -25,6 +25,7 @@
         <activity android:name=".activity.WalletHomeActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.CreateWalletActivity" />
+        <activity android:name=".activity.GameActivity" />
     </application>
 
 </manifest>
