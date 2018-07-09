@@ -9,17 +9,17 @@ import com.muaj.lib.extensions.startActivity
 import com.muaj.lib.util.StatusBarUtils
 import com.muaj.oops.R
 import com.muaj.oops.component.DaggerMainComponent
-import com.muaj.oops.databinding.ActivitySplashscreenBinding
+import com.muaj.oops.databinding.ActivitySplashBinding
 
 
 /**
  * Created by muaj on 2018/7/3
  * Splash Screen Activity
  */
-class SplashscreenActivity(override val layoutId: Int = R.layout.activity_splashscreen,
-                           override val hasStatusBar: Boolean=false,
-                           override val hasToolStub: Boolean=false)
-    : BaseActivity<ActivitySplashscreenBinding>() {
+class SplashActivity(override val layoutId: Int = R.layout.activity_splash,
+                     override val hasStatusBar: Boolean=false,
+                     override val hasToolStub: Boolean=false)
+    : BaseActivity<ActivitySplashBinding>() {
 
     override fun setupActivityComponent(appComponent: AppComponent) {
         DaggerMainComponent.builder()
@@ -42,8 +42,7 @@ class SplashscreenActivity(override val layoutId: Int = R.layout.activity_splash
     override fun initListener() {
         val mHandler:Handler= Handler(Looper.getMainLooper())
         val runnable=mHandler.postDelay(2000){
-//            startActivity<WalletHomeActivity> { }
-            startActivity<GameActivity> { }
+            startActivity<WalletHomeActivity> { }
             finish()
         }
 

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:icon,android:theme,android:appComponentFactory">
         <activity
-            android:name=".activity.SplashscreenActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
